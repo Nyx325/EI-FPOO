@@ -8,25 +8,25 @@ import java.util.List;
 
 import persistencia.entidad.Almacenable;
 
-public abstract class Repositorio {
-    protected List<Almacenable> lista;
+public abstract class Repositorio<T extends Almacenable> {
+    protected List<T> lista;
     protected String pathArchivo;
 
-    public List<Almacenable> getLista(){
+    public List<T> getLista(){
         return lista;
     }
 
     public void mostrar(){
-        for (Almacenable registro : lista) {
+        for (T registro : lista) {
             System.out.println(registro);
         }
     }
 
-    public void add(Almacenable registro){
+    public void add(T registro){
         lista.add(registro);
     }
 
-    public void remove(Almacenable registro){
+    public void remove(T registro){
         lista.remove(registro);
     }
 
@@ -35,7 +35,7 @@ public abstract class Repositorio {
         FileWriter fWriter = new FileWriter(arch);
         PrintWriter pWriter = new PrintWriter(fWriter);
 
-        for (Almacenable registro : lista) {
+        for (T registro : lista) {
             pWriter.append(registro.toStrCsv());
         }
 

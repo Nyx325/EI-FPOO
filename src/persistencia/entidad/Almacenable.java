@@ -1,6 +1,11 @@
 package persistencia.entidad;
 
 public interface Almacenable {
+    /** Getter del identificador único que debe tener un almacenable */
+    public int getCodigo();
+    /** Setter del identificador único que debe tener un almacenable */
+    public void setCodigo(int codigo);
+    
     public String toString();
 
     /**

@@ -11,7 +11,6 @@ public class Empleado implements Almacenable{
     public Empleado(){}
 
     public Empleado(int codigo, String nombre, String apellidoP, String apellidoM, String direccion, String telefono){
-        
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellidoP = apellidoP;

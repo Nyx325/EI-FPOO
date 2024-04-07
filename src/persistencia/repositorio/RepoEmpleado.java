@@ -8,7 +8,7 @@ import java.util.List;
 
 import persistencia.entidad.Empleado;
 
-public class RepoEmpleado extends Repositorio{
+public class RepoEmpleado extends Repositorio<Empleado>{
     public RepoEmpleado() throws IOException {
         this.pathArchivo = "Empleado.csv";
         this.lista = new ArrayList<>();

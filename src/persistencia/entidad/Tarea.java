@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 
 public class Tarea implements Almacenable {
-    protected String codigo;
+    protected int codigo;
     protected int responsable;
     protected LocalDate fInicio;
     protected LocalDate fFin;
@@ -12,18 +12,18 @@ public class Tarea implements Almacenable {
     public Tarea() {
     }
 
-    public Tarea(String codigo, int responsable, LocalDate fInicio, LocalDate fFin) {
-        this.codigo = codigo;
+    public Tarea(int responsable, LocalDate fInicio, LocalDate fFin) {
+        this.codigo = -1;
         this.responsable = responsable;
         this.fInicio = fInicio;
         this.fFin = fFin;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -63,8 +63,8 @@ public class Tarea implements Almacenable {
 
     @Override
     public void fromStrCsv(String[] strCsvSplit) {
-        this.codigo = strCsvSplit[0];
-        this.responsable = Integer.parseInt(strCsvSplit[0]);
+        this.codigo = Integer.parseInt(strCsvSplit[0]);
+        this.responsable = Integer.parseInt(strCsvSplit[1]);
         this.fInicio = LocalDate.parse(strCsvSplit[2]);
         this.fFin = LocalDate.parse(strCsvSplit[3]);
     }    

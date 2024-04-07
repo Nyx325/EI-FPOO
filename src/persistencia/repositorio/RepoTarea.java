@@ -8,9 +8,9 @@ import java.util.List;
 
 import persistencia.entidad.Tarea;
 
-public class RepoTarea extends Repositorio {
-    public RepoTarea() throws IOException {
-        this.pathArchivo = "Tarea.csv";
+public class RepoTarea extends Repositorio<Tarea> {
+    public RepoTarea(String pathArchivo) throws IOException {
+        this.pathArchivo = pathArchivo;
         this.lista = new ArrayList<>();
 
         try {
