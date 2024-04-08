@@ -1,12 +1,12 @@
 package persistencia.entidad;
 
 public class Empleado implements Almacenable{
-    private int codigo;
-    private String nombre;
-    private String apellidoP;
-    private String apellidoM;
-    private String direccion;
-    private String telefono;
+    private int codigo = -1;
+    private String nombre = null;
+    private String apellidoP = null;
+    private String apellidoM = null;
+    private String direccion = null;
+    private String telefono = null;
 
     public Empleado(){}
 

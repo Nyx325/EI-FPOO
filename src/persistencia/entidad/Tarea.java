@@ -4,12 +4,16 @@ import java.time.LocalDate;
 
 
 public class Tarea implements Almacenable {
-    protected int codigo;
-    protected int responsable;
-    protected LocalDate fInicio;
-    protected LocalDate fFin;
+    protected int codigo = -1;
+    protected int responsable = -1;
+    protected LocalDate fInicio = null;
+    protected LocalDate fFin = null;
 
     public Tarea() {
+        this.codigo = -1;
+        this.responsable = -1;
+        this.fInicio = null;
+        this.fFin = null;
     }
 
     public Tarea(int responsable, LocalDate fInicio, LocalDate fFin) {
@@ -68,4 +72,8 @@ public class Tarea implements Almacenable {
         this.fInicio = LocalDate.parse(strCsvSplit[2]);
         this.fFin = LocalDate.parse(strCsvSplit[3]);
     }    
+
+    public boolean equals(Tarea t){
+        return this.responsable == t.responsable && this.fInicio == t.fInicio && this.fFin == t.fFin;
+    }
 }

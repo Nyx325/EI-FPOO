@@ -24,4 +24,5 @@ public interface Almacenable {
      * que es almacenada en el csv
      */
     public void fromStrCsv(String[] strCsvSplit);
+    public boolean equals();
 }
