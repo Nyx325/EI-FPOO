@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.entidad.Almacenable;
@@ -11,9 +12,12 @@ import persistencia.entidad.Almacenable;
 public abstract class Repositorio<T extends Almacenable> {
     protected List<T> lista;
     protected String pathArchivo;
+    protected String separador;
 
-    public List<T> getLista(){
-        return lista;
+    protected Repositorio(String pathArchivo){
+        this.separador = ";";
+        this.pathArchivo = pathArchivo;
+        this.lista = new ArrayList<>();
     }
 
     public void mostrar(){
@@ -42,4 +46,7 @@ public abstract class Repositorio<T extends Almacenable> {
         pWriter.close();
         fWriter.close();
     }
+
+    public abstract Repositorio<T> getInstancia() throws IOException;
+
 }

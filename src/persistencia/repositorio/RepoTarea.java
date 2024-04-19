@@ -3,15 +3,15 @@ package persistencia.repositorio;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.entidad.Tarea;
 
 public class RepoTarea extends Repositorio<Tarea> {
-    public RepoTarea(String pathArchivo) throws IOException {
-        this.pathArchivo = pathArchivo;
-        this.lista = new ArrayList<>();
+    private static RepoTarea instancia;
+
+    private RepoTarea() throws IOException {
+        super("./Tarea.csv");
 
         try {
             File arch = new File(this.pathArchivo);
@@ -19,12 +19,19 @@ public class RepoTarea extends Repositorio<Tarea> {
             
             for (String r : regCsv) {
                 var t = new Tarea();
-                t.fromStrCsv(r.split(","));
+                t.fromStrCsv(r.split(this.separador));
                 this.add(t);
             }
         } catch (IOException e) {
             this.save();
         }
 
+    }
+
+    @Override
+    public RepoTarea getInstancia() throws IOException{
+        if(instancia == null)
+            instancia = new RepoTarea();
+        return instancia;
     }
 }
