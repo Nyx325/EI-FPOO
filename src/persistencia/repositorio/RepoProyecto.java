@@ -27,8 +27,7 @@ public class RepoProyecto extends Repositorio<Proyecto>{
         }
     }
 
-    @Override
-    public RepoProyecto getInstancia() throws IOException {
+    public static RepoProyecto getInstancia() throws IOException {
         if(instancia == null)
             instancia = new RepoProyecto();
         return instancia;

@@ -1,14 +1,12 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
 import persistencia.entidad.Almacenable;
 import persistencia.repositorio.Repositorio;
 
-public class Logica<T extends Almacenable> {
-    protected Repositorio<T> repo;
-
-    public Repositorio<T> getRepo(){
-        return repo;
-    }
+public abstract class Logica<T extends Almacenable> {
+    Repositorio<T> repo;
 
     /** 
      * "Validacion" de el agregado de una tarea al repositorio
@@ -16,17 +14,7 @@ public class Logica<T extends Almacenable> {
      * necesarios pero sin el codigo asignado (-1)
      */
     public void add(T r){
-        // Incrementar el valor de la lista según las anterores
-        if(repo.getLista().isEmpty()){
-            // En caso de no haber tareas, se toma como la primer tarea
-            r.setCodigo(1);
-        }
-        else{
-            //En caso contrario se asigna el numero de tarea incrementando
-            //el num de la ultima tarea
-            r.setCodigo(repo.getLista().getLast().getCodigo()+1);
-        }
-
+        r.setCodigo(repo.getLista().isEmpty() ? 1 : repo.getLista().getLast().getCodigo()+1);
         repo.add(r);
     }
 
@@ -47,13 +35,18 @@ public class Logica<T extends Almacenable> {
      * @return retorna la referencia al registro en cuestion
      * de lo contrario retorna null
      */
-    public T buscar(int codigo){
+    public List<T> buscar_por_id(int codigo){
+        List<T> busqueda = new ArrayList<>();
+
         for(T r:repo.getLista()){
             if(r.getCodigo() == codigo){
-                return r;
+                busqueda.add(r);
+                System.out.println("1) "+r);
+                break;
             }
         }
 
-        return null;
+        if(busqueda.isEmpty()) System.out.println("No  se encontraron resultados");
+        return busqueda;
     }
 }

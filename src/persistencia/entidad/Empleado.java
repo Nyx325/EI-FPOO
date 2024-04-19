@@ -86,4 +86,10 @@ public class Empleado implements Almacenable{
         this.direccion = strCsvSplit[4];
         this.telefono = strCsvSplit[5];
     }
+
+    @Override
+    public boolean equals(Almacenable obj){
+        if(!(obj instanceof Empleado)) return false;
+        return this.getCodigo() == obj.getCodigo();
+    }
 }

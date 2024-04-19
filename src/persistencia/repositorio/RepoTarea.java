@@ -28,8 +28,7 @@ public class RepoTarea extends Repositorio<Tarea> {
 
     }
 
-    @Override
-    public RepoTarea getInstancia() throws IOException{
+    public static RepoTarea getInstancia() throws IOException{
         if(instancia == null)
             instancia = new RepoTarea();
         return instancia;

@@ -20,6 +20,10 @@ public abstract class Repositorio<T extends Almacenable> {
         this.lista = new ArrayList<>();
     }
 
+    public List<T> getLista(){
+        return lista;
+    }
+
     public void mostrar(){
         for (T registro : lista) {
             System.out.println(registro);
@@ -46,7 +50,4 @@ public abstract class Repositorio<T extends Almacenable> {
         pWriter.close();
         fWriter.close();
     }
-
-    public abstract Repositorio<T> getInstancia() throws IOException;
-
 }
