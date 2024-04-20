@@ -48,12 +48,10 @@ public abstract class Logica<T extends Almacenable> {
         for(T r:repo.getLista()){
             if(r.getCodigo() == codigo){
                 busqueda.add(r);
-                System.out.println("1) "+r);
                 break;
             }
         }
 
-        if(busqueda.isEmpty()) System.out.println("No  se encontraron resultados");
         return busqueda;
     }
 }

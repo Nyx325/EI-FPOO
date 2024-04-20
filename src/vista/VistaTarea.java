@@ -17,7 +17,8 @@ public class VistaTarea extends Vista<Tarea>{
     }
 
     @Override
-    public void crear(){
+    public void crear() throws IOException{
+        var t = new Tarea();
         int anio, mes, dia, responsable;
         LocalDate fInicio, fFin;
         System.out.println("Ingresa la fecha de inicio");
@@ -42,7 +43,10 @@ public class VistaTarea extends Vista<Tarea>{
         System.out.println("Ingresa el responsable");
         responsable = teclado.nextInt();
 
-        var t = new Tarea(responsable, fInicio, fFin);
+        t.setResponsable(responsable);
+        t.setfInicio(fInicio);
+        t.setfFin(fFin);
+
         logica.add(t);
     }
 

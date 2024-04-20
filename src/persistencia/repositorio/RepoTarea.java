@@ -17,6 +17,7 @@ public class RepoTarea extends Repositorio<Tarea> {
         try {
             File arch = new File(this.pathArchivo);
             List<String> regCsv = Files.readAllLines(arch.toPath());
+
             for (String r : regCsv) {
                 this.add(fromStrCsv(r.split(separador)));
             }

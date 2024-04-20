@@ -65,8 +65,8 @@ public abstract class Vista<T extends Almacenable>{
         List<T> b = buscar();
 
         if (b.isEmpty()) return;
-
         System.out.println("0: Salir");
+
         do{
             eleccion = teclado.nextInt();
             if(eleccion<0 || eleccion>b.size())
@@ -76,5 +76,17 @@ public abstract class Vista<T extends Almacenable>{
         if(eleccion == 0) return;
         
         logica.remove(b.get(eleccion-1));
+    }
+
+    public void printBusqueda(List<T> busqueda){
+        long contador = 1;
+        if(busqueda.isEmpty()){
+            System.out.println("No se encontraron resultados");
+            return;
+        }
+
+        for(T r : busqueda){
+            System.out.println(contador+") "+r);
+        }
     }
 }

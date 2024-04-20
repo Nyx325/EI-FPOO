@@ -23,37 +23,26 @@ public class LogicaEmpleado extends Logica<Empleado>{
     }
 
     public List<Empleado> buscar_por_nombre(String nombre){
-        int contador = 1;
         List<Empleado> busqueda = new ArrayList<>();
 
         for(Empleado e:repo.getLista()){
-            if(e.getNombre().equals(nombre))
-            {
+            if(e.getNombre().equals(nombre)){
                 busqueda.add(e);
-                System.out.println(contador+") "+e);
-                contador++;
             }
         }
-        
-        if(busqueda.isEmpty()) System.out.println("No se encontraron resultados");
 
         return busqueda;
     }
 
     public List<Empleado> buscar_por_telefono(String telefono){
-        int contador = 1;
         List<Empleado> busqueda = new ArrayList<>();
 
         for(Empleado e:repo.getLista()){
-            if(e.getTelefono().equals(telefono))
-            {
+            if(e.getTelefono().equals(telefono)){
                 busqueda.add(e);
-                System.out.println(contador+") "+e);
-                contador++;
             }
         }
 
-        if(busqueda.isEmpty()) System.out.println("No se encontraron resultados");
         return busqueda;
     }
 }
