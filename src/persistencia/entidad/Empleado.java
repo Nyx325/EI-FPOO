@@ -66,30 +66,9 @@ public class Empleado implements Almacenable{
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
     @Override
-    public String toString() {
+    public String toString(){
         return codigo+" "+nombre+" "+apellidoP+" "+apellidoM+" "+direccion+" "+telefono;
-    }
-
-    @Override
-    public String toStrCsv() {
-        return codigo+","+nombre+","+apellidoP+","+apellidoM+","+direccion+","+telefono+"\n";
-    }
-
-    @Override
-    public void fromStrCsv(String[] strCsvSplit) {
-        this.codigo = Integer.parseInt(strCsvSplit[0]);
-        this.nombre = strCsvSplit[1];
-        this.apellidoP = strCsvSplit[2];
-        this.apellidoM = strCsvSplit[3];
-        this.direccion = strCsvSplit[4];
-        this.telefono = strCsvSplit[5];
-    }
-
-    @Override
-    public boolean equals(Almacenable obj){
-        if(!(obj instanceof Empleado)) return false;
-        return this.getCodigo() == obj.getCodigo();
     }
 }

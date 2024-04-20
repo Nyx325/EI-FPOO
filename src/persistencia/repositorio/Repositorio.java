@@ -30,12 +30,14 @@ public abstract class Repositorio<T extends Almacenable> {
         }
     }
 
-    public void add(T registro){
+    public void add(T registro) throws IOException{
         lista.add(registro);
+        save();
     }
 
-    public void remove(T registro){
+    public void remove(T registro) throws IOException{
         lista.remove(registro);
+        save();
     }
 
     public void save() throws IOException {
@@ -44,10 +46,13 @@ public abstract class Repositorio<T extends Almacenable> {
         PrintWriter pWriter = new PrintWriter(fWriter);
 
         for (T registro : lista) {
-            pWriter.append(registro.toStrCsv());
+            pWriter.append(toStrCsv(registro));
         }
 
         pWriter.close();
         fWriter.close();
     }
+
+    public abstract String toStrCsv(T r);
+    public abstract T fromStrCsv(String[] strCsvSplit);
 }

@@ -1,5 +1,6 @@
 package logica;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import persistencia.entidad.Almacenable;
@@ -8,12 +9,17 @@ import persistencia.repositorio.Repositorio;
 public abstract class Logica<T extends Almacenable> {
     Repositorio<T> repo;
 
+
+    public Repositorio<T> getRepo(){
+        return repo;
+    }
+
     /** 
      * "Validacion" de el agregado de una tarea al repositorio
      * @param r Un objeto tarea el cual ya debe tener los datos 
      * necesarios pero sin el codigo asignado (-1)
      */
-    public boolean add(T r){
+    public boolean add(T r) throws IOException {
         r.setCodigo(repo.getLista().isEmpty() ? 1 : repo.getLista().getLast().getCodigo()+1);
         repo.add(r);
         return true;
@@ -25,7 +31,7 @@ public abstract class Logica<T extends Almacenable> {
      * se quiere eliminar
      * @param r referencia al registro a eliminar
      */
-    public void remove(T r){
+    public void remove(T r) throws IOException{
         repo.remove(r);
     }
 

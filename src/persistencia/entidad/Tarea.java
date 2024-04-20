@@ -16,8 +16,8 @@ public class Tarea implements Almacenable {
         this.fFin = null;
     }
 
-    public Tarea(int responsable, LocalDate fInicio, LocalDate fFin) {
-        this.codigo = -1;
+    public Tarea(int codigo, int responsable, LocalDate fInicio, LocalDate fFin) {
+        this.codigo = codigo;
         this.responsable = responsable;
         this.fInicio = fInicio;
         this.fFin = fFin;
@@ -58,22 +58,5 @@ public class Tarea implements Almacenable {
     @Override
     public String toString() {
         return codigo + " " + responsable + " " + fInicio + " " + fFin;
-    }
-
-    @Override
-    public String toStrCsv() {
-        return codigo + "," + responsable + "," + fInicio + "," + fFin + ",";
-    }
-
-    @Override
-    public void fromStrCsv(String[] strCsvSplit) {
-        this.codigo = Integer.parseInt(strCsvSplit[0]);
-        this.responsable = Integer.parseInt(strCsvSplit[1]);
-        this.fInicio = LocalDate.parse(strCsvSplit[2]);
-        this.fFin = LocalDate.parse(strCsvSplit[3]);
-    }    
-
-    public boolean equals(Tarea t){
-        return this.responsable == t.responsable && this.fInicio == t.fInicio && this.fFin == t.fFin;
     }
 }

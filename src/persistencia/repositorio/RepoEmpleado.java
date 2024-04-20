@@ -18,9 +18,7 @@ public class RepoEmpleado extends Repositorio<Empleado>{
             List<String> regCsv = Files.readAllLines(arch.toPath());
             
             for (String r : regCsv) {
-                var e = new Empleado();
-                e.fromStrCsv(r.split(this.separador));
-                this.add(e);
+                this.add(fromStrCsv(r.split(separador)));
             }
         } catch (IOException e) {
             this.save();
@@ -31,5 +29,20 @@ public class RepoEmpleado extends Repositorio<Empleado>{
         if(instancia == null)
             instancia = new RepoEmpleado();
         return instancia;
+    }
+
+    public String toStrCsv(Empleado e) {
+        return e.getCodigo()+separador+e.getNombre()+separador+e.getApellidoP()+separador+e.getApellidoM()+separador+e.getDireccion()+separador+e.getTelefono()+"\n";
+    }
+
+    public Empleado fromStrCsv(String[] datos){
+        return new Empleado(
+                Integer.parseInt(datos[0]),
+                datos[1],
+                datos[2],
+                datos[3],
+                datos[4],
+                datos[5]
+        );
     }
 }

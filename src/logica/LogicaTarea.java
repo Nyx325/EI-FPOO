@@ -11,7 +11,7 @@ import persistencia.repositorio.RepoTarea;
 public class LogicaTarea extends Logica<Tarea> {
     public static RepoTarea repo;
 
-    public LogicaTarea(String pathArchivo) throws IOException{
+    public LogicaTarea() throws IOException{
         repo = RepoTarea.getInstancia();
     }
 

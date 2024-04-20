@@ -10,9 +10,10 @@ import logica.LogicaTarea;
 import persistencia.entidad.Tarea;
 
 public class VistaTarea extends Vista<Tarea>{
-    public VistaTarea(String pathArchivo) throws IOException {
+    public VistaTarea() throws IOException {
+        this.nombreTipo = "tarea";
         this.teclado = new Scanner(System.in);
-        this.logica = new LogicaTarea(pathArchivo);
+        this.logica = new LogicaTarea();
     }
 
     @Override

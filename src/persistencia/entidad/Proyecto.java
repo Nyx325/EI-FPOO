@@ -1,8 +1,6 @@
 package persistencia.entidad;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Proyecto implements Almacenable {
     private int codigo;
@@ -11,7 +9,6 @@ public class Proyecto implements Almacenable {
     private LocalDate fInicio;
     private LocalDate fFin;
     private int jefe;
-    private List<Tarea> tareas;
 
     public Proyecto(){}
 
@@ -22,7 +19,6 @@ public class Proyecto implements Almacenable {
         this.fInicio = fInicio;
         this.fFin = fFin;
         this.jefe = jefe;
-        this.tareas = new ArrayList<>();
     }
 
     public int getCodigo() {
@@ -67,19 +63,4 @@ public class Proyecto implements Almacenable {
         // TODO buscar jefe o algo asi para imprimirlo
         return codigo+" "+nombre+" "+descipcion+" "+fInicio+" "+fFin;
     }
-    @Override
-    public void fromStrCsv(String[] strCsvSplit) {
-        this.codigo = Integer.parseInt(strCsvSplit[0]);
-        this.nombre = strCsvSplit[1];
-        this.descipcion = strCsvSplit[2];
-        this.fInicio = LocalDate.parse(strCsvSplit[3]);
-        this.fFin = LocalDate.parse(strCsvSplit[4]);
-        this.jefe = Integer.parseInt(strCsvSplit[5]);
-    }
-    @Override
-    public String toStrCsv() {
-        return codigo+","+nombre+","+descipcion+","+fInicio+","+fFin+","+jefe;
-    }
-    
-    
 }

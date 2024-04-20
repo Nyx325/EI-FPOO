@@ -12,8 +12,8 @@ public class LogicaEmpleado extends Logica<Empleado>{
         repo = RepoEmpleado.getInstancia();
     }
 
-    public boolean add(Empleado obj){
-        if(!buscar_por_telefono(obj).isEmpty()){
+    public boolean add(Empleado obj) throws IOException{
+        if(!buscar_por_telefono(obj.getTelefono()).isEmpty()){
             System.out.println("Ya existe un empleado con este teléfono");
             return false;
         }
@@ -22,17 +22,12 @@ public class LogicaEmpleado extends Logica<Empleado>{
         return true;
     }
 
-    public List<Empleado> buscar_por_nombre(Empleado obj){
+    public List<Empleado> buscar_por_nombre(String nombre){
         int contador = 1;
         List<Empleado> busqueda = new ArrayList<>();
 
         for(Empleado e:repo.getLista()){
-            if
-            (
-                e.getNombre().equals(obj.getNombre()) &&
-                e.getApellidoP().equals(obj.getApellidoP()) &&
-                e.getApellidoM().equals(obj.getApellidoM())
-            )
+            if(e.getNombre().equals(nombre))
             {
                 busqueda.add(e);
                 System.out.println(contador+") "+e);
@@ -45,12 +40,12 @@ public class LogicaEmpleado extends Logica<Empleado>{
         return busqueda;
     }
 
-    public List<Empleado> buscar_por_telefono(Empleado obj){
+    public List<Empleado> buscar_por_telefono(String telefono){
         int contador = 1;
         List<Empleado> busqueda = new ArrayList<>();
 
         for(Empleado e:repo.getLista()){
-            if(e.getTelefono().equals(obj.getTelefono()))
+            if(e.getTelefono().equals(telefono))
             {
                 busqueda.add(e);
                 System.out.println(contador+") "+e);
