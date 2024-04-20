@@ -9,10 +9,10 @@ import persistencia.entidad.Tarea;
 import persistencia.repositorio.RepoTarea;
 
 public class LogicaTarea extends Logica<Tarea> {
-    public static RepoTarea repo;
-
     public LogicaTarea() throws IOException{
+        System.out.println("Haciendo instancia de repo(?)");
         repo = RepoTarea.getInstancia();
+        System.out.println(repo);
     }
 
     public List<Tarea> buscar_por_responsable(int responsable){

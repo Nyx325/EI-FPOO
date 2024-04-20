@@ -16,7 +16,7 @@ public class VistaGeneral {
         //vPro = new VistaProyecto();
     }
 
-    public void menu(){
+    public void menu() throws IOException{
         int opc;
         while(true){
             System.out.println("Bievenidos");

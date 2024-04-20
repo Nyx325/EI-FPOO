@@ -9,7 +9,7 @@ import java.util.List;
 import persistencia.entidad.Tarea;
 
 public class RepoTarea extends Repositorio<Tarea> {
-    private static RepoTarea instancia;
+    private static RepoTarea instancia = null;
 
     private RepoTarea() throws IOException {
         super("./Tarea.csv");

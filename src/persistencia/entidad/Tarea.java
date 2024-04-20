@@ -57,6 +57,6 @@ public class Tarea implements Almacenable {
 
     @Override
     public String toString() {
-        return "Codigo: "+codigo+ "\n Inicio: "+fInicio + "\nFin: " + fFin+"\n";
+        return "Codigo: "+codigo+ "\nInicio: "+fInicio + " Fin: " + fFin;
     }
 }
