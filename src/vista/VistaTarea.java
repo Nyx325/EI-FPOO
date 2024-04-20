@@ -2,6 +2,8 @@ package vista;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import logica.LogicaTarea;
@@ -53,5 +55,13 @@ public class VistaTarea extends Vista<Tarea>{
     public void modificar() {
         // TODO 
         
+    }
+
+    public List<Tarea> buscar(){
+        List<Tarea> b = new ArrayList<>();
+
+
+
+        return b;
     }
 }

@@ -15,19 +15,18 @@ public class LogicaTarea extends Logica<Tarea> {
         repo = RepoTarea.getInstancia();
     }
 
-    /**
-     * @param responsable id del responsable a buscar
-     * @return si no se encuentran valores devuelve una lista
-     * vacía */
     public List<Tarea> buscar_por_responsable(int responsable){
+        long contador = 1;
         List<Tarea> busqueda = new ArrayList<>();
         for (Tarea tarea : repo.getLista()) {
             if(tarea.getResponsable() == responsable){
                 busqueda.add(tarea);
+                System.out.println(contador+") "+tarea);
+                contador++;
             }
         }
 
-        busqueda.getLast();
+        if(busqueda.isEmpty()) System.out.println("No se encontraron resultados");
 
         return busqueda;
     }
@@ -37,13 +36,17 @@ public class LogicaTarea extends Logica<Tarea> {
      * @return si no se encuentran valores devuelve una lista
      * vacía */
     public List<Tarea> buscar_por_fInicio(LocalDate fInicio){
+        long contador = 1;
         List<Tarea> b = new ArrayList<>();
         for(Tarea t:repo.getLista()){
             if(t.getfInicio().equals(fInicio)){
                 b.add(t);
+                System.out.println(contador+") "+t);
+                contador++;
             }
         }
 
+        if(b.isEmpty()) System.out.println("No se encontraron resultados");
         return b;
     }
 
@@ -52,13 +55,17 @@ public class LogicaTarea extends Logica<Tarea> {
      * @return si no se encuentran valores devuelve una lista
      * vacía */
     public List<Tarea> buscar_por_fFin(LocalDate fFin){
+        long contador = 1;
         List<Tarea> b = new ArrayList<>();
         for(Tarea t:repo.getLista()){
             if(t.getfFin().equals(fFin)){
                 b.add(t);
+                System.out.println(contador+") "+t);
+                contador++;
             }
         }
 
+        if(b.isEmpty()) System.out.println("No se encontraron resultados");
         return b;
     }
 
@@ -78,14 +85,6 @@ public class LogicaTarea extends Logica<Tarea> {
         if(tModificado.getfFin() != null)
             t.setfFin(tModificado.getfFin());
 
-        this.repo.save();
-    }
-
-    @Override
-    public void add(Tarea t){
-        //validaciones
-        
-        // agregar y determinar codigo
-        super.add(t);
+        repo.save();
     }
 }

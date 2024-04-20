@@ -13,9 +13,10 @@ public abstract class Logica<T extends Almacenable> {
      * @param r Un objeto tarea el cual ya debe tener los datos 
      * necesarios pero sin el codigo asignado (-1)
      */
-    public void add(T r){
+    public boolean add(T r){
         r.setCodigo(repo.getLista().isEmpty() ? 1 : repo.getLista().getLast().getCodigo()+1);
         repo.add(r);
+        return true;
     }
 
     

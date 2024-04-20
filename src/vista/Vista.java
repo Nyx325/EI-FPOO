@@ -69,8 +69,4 @@ public abstract class Vista<T extends Almacenable>{
         
         logica.remove(b.get(eleccion-1));
     }
-
-    public void mostrar(){
-        logica.getRepo().mostrar();
-    }
 }

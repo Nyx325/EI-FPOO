@@ -12,6 +12,16 @@ public class LogicaEmpleado extends Logica<Empleado>{
         repo = RepoEmpleado.getInstancia();
     }
 
+    public boolean add(Empleado obj){
+        if(!buscar_por_telefono(obj).isEmpty()){
+            System.out.println("Ya existe un empleado con este teléfono");
+            return false;
+        }
+
+        super.add(obj);
+        return true;
+    }
+
     public List<Empleado> buscar_por_nombre(Empleado obj){
         int contador = 1;
         List<Empleado> busqueda = new ArrayList<>();
@@ -32,6 +42,23 @@ public class LogicaEmpleado extends Logica<Empleado>{
         
         if(busqueda.isEmpty()) System.out.println("No se encontraron resultados");
 
+        return busqueda;
+    }
+
+    public List<Empleado> buscar_por_telefono(Empleado obj){
+        int contador = 1;
+        List<Empleado> busqueda = new ArrayList<>();
+
+        for(Empleado e:repo.getLista()){
+            if(e.getTelefono().equals(obj.getTelefono()))
+            {
+                busqueda.add(e);
+                System.out.println(contador+") "+e);
+                contador++;
+            }
+        }
+
+        if(busqueda.isEmpty()) System.out.println("No se encontraron resultados");
         return busqueda;
     }
 }
