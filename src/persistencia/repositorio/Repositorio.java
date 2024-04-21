@@ -37,7 +37,7 @@ public abstract class Repositorio<T extends Almacenable> {
 
     public void remove(T registro) throws IOException{
         lista.remove(registro);
-        save();
+        this.save();
     }
 
     public void save() throws IOException {
@@ -46,6 +46,7 @@ public abstract class Repositorio<T extends Almacenable> {
         PrintWriter pWriter = new PrintWriter(fWriter);
 
         for (T registro : lista) {
+            System.out.println(registro);
             pWriter.append(toStrCsv(registro));
         }
 

@@ -23,7 +23,6 @@ public class VistaTarea extends Vista<Tarea> {
         this.vPro = new VistaProyecto();
     }
 
-    /* 
     @Override
     public void menu() throws IOException {
         while(true){
@@ -52,7 +51,7 @@ public class VistaTarea extends Vista<Tarea> {
                     break;
             }
         }
-    }*/
+    }
 
     @Override
     public void crear() throws IOException {
