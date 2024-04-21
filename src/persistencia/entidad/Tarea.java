@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class Tarea implements Almacenable {
     protected int codigo = -1;
     protected int responsable = -1;
+    protected int proyecto = -1;
     protected LocalDate fInicio = null;
     protected LocalDate fFin = null;
 
@@ -55,8 +56,17 @@ public class Tarea implements Almacenable {
         this.fFin = fFin;
     }
 
+    public int getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(int proyecto) {
+        this.proyecto = proyecto;
+    }
+
     @Override
     public String toString() {
         return "Codigo: "+codigo+ "\nInicio: "+fInicio + " Fin: " + fFin;
     }
+
 }

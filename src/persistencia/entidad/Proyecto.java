@@ -61,6 +61,6 @@ public class Proyecto implements Almacenable {
     @Override
     public String toString() {
         // TODO buscar jefe o algo asi para imprimirlo
-        return codigo+" "+nombre+" "+descipcion+" "+fInicio+" "+fFin;
+        return "Codigo: "+codigo+"\nNombre: "+nombre+"\nDescipcion: "+descipcion+"\nFecha inicio: "+fInicio+" Fecha fin: "+fFin;
     }
 }

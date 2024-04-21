@@ -9,15 +9,19 @@ import java.util.Scanner;
 import logica.LogicaProyecto;
 import persistencia.entidad.Empleado;
 import persistencia.entidad.Proyecto;
+import persistencia.entidad.Tarea;
+import persistencia.repositorio.RepoTarea;
 
 public class VistaProyecto extends Vista<Proyecto> {
     VistaEmpleado vEmp;
+    RepoTarea rTar;
 
     public VistaProyecto() throws IOException {
         this.nombreTipo = "proyecto";
         logica = new LogicaProyecto();
         teclado = new Scanner(System.in);
         vEmp = new VistaEmpleado();
+        rTar = RepoTarea.getInstancia();
     }
 
     @Override
@@ -70,18 +74,18 @@ public class VistaProyecto extends Vista<Proyecto> {
 
             if (opc > 2 || opc < 1 || b.isEmpty())
                 continue;
-            
-                do {
-                    opc = teclado.nextInt();
-                    if (opc < 1 || opc > b.size()) {
-                        System.out.println("Ingrese un indice válido");
-                        vEmp.printBusqueda(b);
-                    }
-                } while (opc < 1 || opc > b.size());
-    
-                responsable = b.get(opc - 1).getCodigo();
-                break;
-        }while (true);
+
+            do {
+                opc = teclado.nextInt();
+                if (opc < 1 || opc > b.size()) {
+                    System.out.println("Ingrese un indice válido");
+                    vEmp.printBusqueda(b);
+                }
+            } while (opc < 1 || opc > b.size());
+
+            responsable = b.get(opc - 1).getCodigo();
+            break;
+        } while (true);
 
         p.setJefe(responsable);
 
@@ -89,7 +93,7 @@ public class VistaProyecto extends Vista<Proyecto> {
     }
 
     @Override
-    public List<Proyecto> buscar(){
+    public List<Proyecto> buscar() {
         int codigo, opc;
         int[] fecha = new int[3];
         String entrada;
@@ -118,12 +122,12 @@ public class VistaProyecto extends Vista<Proyecto> {
             case 2:
                 System.out.println("Ingresa el nombre del proyecto");
                 entrada = teclado.nextLine();
-                b = ((LogicaProyecto)logica).buscarPorNombre(entrada);
+                b = ((LogicaProyecto) logica).buscarPorNombre(entrada);
                 break;
             case 3:
                 System.out.println("Ingresa la descripcion del proyecto");
                 entrada = teclado.nextLine();
-                b = ((LogicaProyecto)logica).buscarPorDescripcion(entrada);
+                b = ((LogicaProyecto) logica).buscarPorDescripcion(entrada);
                 break;
             case 4:
                 System.out.println("Ingresa la fecha de inicio");
@@ -134,7 +138,7 @@ public class VistaProyecto extends Vista<Proyecto> {
                 System.out.println("Ingresa el año de inicio");
                 fecha[2] = teclado.nextInt();
                 teclado.nextLine();
-                b = ((LogicaProyecto)logica).buscarPorfInicio(LocalDate.of(fecha[0], fecha[1], fecha[2]));
+                b = ((LogicaProyecto) logica).buscarPorfInicio(LocalDate.of(fecha[0], fecha[1], fecha[2]));
                 break;
             case 5:
                 System.out.println("Ingresa la fecha de fin");
@@ -145,21 +149,97 @@ public class VistaProyecto extends Vista<Proyecto> {
                 System.out.println("Ingresa el año de fin");
                 fecha[2] = teclado.nextInt();
                 teclado.nextLine();
-                b = ((LogicaProyecto)logica).buscarPorfFin(LocalDate.of(fecha[0], fecha[1], fecha[2]));
+                b = ((LogicaProyecto) logica).buscarPorfFin(LocalDate.of(fecha[0], fecha[1], fecha[2]));
                 break;
             default:
                 break;
         }
-        
+
         printBusqueda(b);
         return b;
     }
 
     @Override
-    public void modificar() throws IOException{
+    public void modificar() throws IOException {
+        int[] fecha = new int[3];
         int opc;
         List<Proyecto> b = buscar();
-        
+        if (b.isEmpty())
+            return;
+        System.out.println("0) Salir");
+        do {
+            opc = teclado.nextInt();
+            if (opc < 0 || opc > b.size())
+                System.out.println("Ingrese un índice válido");
+        } while (opc < 0 || opc > b.size());
+
+        if (opc == 0)
+            return;
+        var p = (Proyecto) b.get(opc - 1);
+
+        do {
+            System.out.println("Ingresa el campo a modificar");
+            System.out.println("1) Nombre");
+            System.out.println("2) Descipcion");
+            System.out.println("3) Fecha de inicio");
+            System.out.println("4) Fecha de fin");
+            System.out.println("5) Jefe");
+            System.out.println("6) Guardar");
+            System.out.println("7) Cancelar");
+            opc = teclado.nextInt();
+            teclado.nextLine();
+
+            switch (opc) {
+                case 1:
+                    System.out.println("Ingresa el nuevo nombre");
+                    p.setNombre(teclado.nextLine());
+                    break;
+                case 2:
+                    System.out.println("Ingresa la nueva descipcion");
+                    p.setDescipcion(teclado.nextLine());
+                    break;
+                case 3:
+                    System.out.println("Ingresa la nueva fecha de inicio");
+                    System.out.println("Ingresa el dia de inicio");
+                    fecha[0] = teclado.nextInt();
+                    System.out.println("Ingresa el mes de inicio");
+                    fecha[1] = teclado.nextInt();
+                    System.out.println("Ingresa el año de inicio");
+                    fecha[2] = teclado.nextInt();
+                    p.setfInicio(LocalDate.of(fecha[2], fecha[1], fecha[0]));
+                    break;
+                case 4:
+                    System.out.println("Ingresa la nueva fecha de fin");
+                    System.out.println("Ingresa el dia de fin");
+                    fecha[0] = teclado.nextInt();
+                    System.out.println("Ingresa el mes de fin");
+                    fecha[1] = teclado.nextInt();
+                    System.out.println("Ingresa el año de fin");
+                    fecha[2] = teclado.nextInt();
+                    p.setfFin(LocalDate.of(fecha[2], fecha[1], fecha[0]));
+                    break;
+                case 5:
+                    System.out.println("Ingrese el nuevo jefe");
+                    var e = vEmp.buscar();
+                    if (e.isEmpty())
+                        return;
+
+                    do {
+                        opc = teclado.nextInt();
+                        if (opc < 1 || opc > b.size())
+                            System.out.println("Ingrese un indice válido");
+                    } while (opc < 1 || opc > b.size());
+                    p.setJefe(e.get(opc - 1).getCodigo());
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    return;
+                default:
+                    break;
+            }
+        } while (opc != 0);
+        logica.getRepo().save();
     }
 
     @Override
@@ -172,8 +252,13 @@ public class VistaProyecto extends Vista<Proyecto> {
         for (Proyecto r : registros) {
             System.out.println(r);
             responsable = vEmp.logica.buscar_por_id(r.getJefe()).get(0);
-            System.out.println("Jefe " + responsable.getNombre() + " " + responsable.getApellidoP() + " "
-                    + responsable.getApellidoM());
+            System.out.println("Jefe: " + responsable.getNombre() + " " + responsable.getApellidoP() + " "
+                    + responsable.getApellidoM() + "\n");
+            for(Tarea t : rTar.getLista()){
+                if(t.getCodigo() == r.getCodigo()){
+                    System.out.println("- "+t);
+                }
+            }
         }
         System.out.println("");
     }

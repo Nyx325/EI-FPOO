@@ -7,13 +7,13 @@ public class VistaGeneral {
     Scanner teclado;
     VistaEmpleado vEmp;
     VistaTarea vTar;
-    //VistaProyecto vPro;
+    VistaProyecto vPro;
     
     public VistaGeneral() throws IOException {
         teclado = new Scanner(System.in);
         vEmp = new VistaEmpleado();
         vTar = new VistaTarea();
-        //vPro = new VistaProyecto();
+        vPro = new VistaProyecto();
     }
 
     public void menu() throws IOException{
@@ -33,6 +33,7 @@ public class VistaGeneral {
                     vEmp.menu();
                     break;
                 case 2:
+                    vPro.menu();
                     break;
                 case 3:
                     vTar.menu();
