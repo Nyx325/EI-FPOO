@@ -254,6 +254,8 @@ public class VistaProyecto extends Vista<Proyecto> {
             responsable = vEmp.logica.buscar_por_id(r.getJefe()).get(0);
             System.out.println("Jefe: " + responsable.getNombre() + " " + responsable.getApellidoP() + " "
                     + responsable.getApellidoM() + "\n");
+            System.out.println("Tareas:");
+            if(rTar.getLista().isEmpty()) System.out.println("No existen tareas");
             for(Tarea t : rTar.getLista()){
                 if(t.getCodigo() == r.getCodigo()){
                     System.out.println("- "+t);
