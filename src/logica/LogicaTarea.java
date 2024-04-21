@@ -10,9 +10,7 @@ import persistencia.repositorio.RepoTarea;
 
 public class LogicaTarea extends Logica<Tarea> {
     public LogicaTarea() throws IOException{
-        System.out.println("Haciendo instancia de repo(?)");
         repo = RepoTarea.getInstancia();
-        System.out.println(repo);
     }
 
     public List<Tarea> buscar_por_responsable(int responsable){
@@ -48,18 +46,21 @@ public class LogicaTarea extends Logica<Tarea> {
         return b;
     }
 
-    public void modificar(Tarea t, Tarea tModificado) throws IOException {
-        if (tModificado.getCodigo() != -1)
-            t.setCodigo(tModificado.getCodigo());
+    public void dropPorProyecto(int idPro) throws IOException{
+        List<Tarea> borrados = new ArrayList<>();
+        System.out.println("Id pro: "+idPro);
+        System.out.println(repo.getLista().size());
+        for(Tarea t : repo.getLista()){
+            System.out.println("Id tar: "+t.getProyecto());
+            if(t.getProyecto() == idPro){
+                System.out.println("Borrao");
+                borrados.add(t);
+            }
+        }
 
-        if (tModificado.getResponsable() != -1)
-            t.setResponsable(tModificado.getResponsable());
-
-        if(tModificado.getfInicio() != null)
-            t.setfInicio(tModificado.getfInicio());
-
-        if(tModificado.getfFin() != null)
-            t.setfFin(tModificado.getfFin());
+        for(Tarea t : borrados){
+            repo.remove(t);
+        }
 
         repo.save();
     }

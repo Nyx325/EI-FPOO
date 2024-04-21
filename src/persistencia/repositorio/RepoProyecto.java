@@ -45,6 +45,6 @@ public class RepoProyecto extends Repositorio<Proyecto> {
 
     public String toStrCsv(Proyecto r) {
         return r.getCodigo() + separador + r.getNombre() + separador + r.getDescipcion() + separador + r.getfInicio()
-                + separador + r.getfFin() + separador + r.getJefe();
+                + separador + r.getfFin() + separador + r.getJefe()+"\n";
     }
 }
