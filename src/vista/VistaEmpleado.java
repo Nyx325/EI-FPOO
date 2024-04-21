@@ -75,7 +75,6 @@ public class VistaEmpleado extends Vista<Empleado>{
         int opc;
         List<Empleado> b = buscar();
 
-        printBusqueda(b);
         if(b.isEmpty()) return;
         System.out.println("0) Salir");
 

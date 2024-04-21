@@ -1,8 +1,7 @@
 package logica;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import persistencia.entidad.Empleado;
 import persistencia.repositorio.RepoEmpleado;

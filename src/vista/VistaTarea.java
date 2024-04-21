@@ -10,7 +10,7 @@ import logica.LogicaTarea;
 import persistencia.entidad.Empleado;
 import persistencia.entidad.Tarea;
 
-public class VistaTarea extends Vista<Tarea>{
+public class VistaTarea extends Vista<Tarea> {
     VistaEmpleado vEmp;
 
     public VistaTarea() throws IOException {
@@ -21,7 +21,7 @@ public class VistaTarea extends Vista<Tarea>{
     }
 
     @Override
-    public void crear() throws IOException{
+    public void crear() throws IOException {
         List<Empleado> b = new ArrayList<>();
         var t = new Tarea();
         int anio, mes, dia, responsable, opc;
@@ -34,7 +34,7 @@ public class VistaTarea extends Vista<Tarea>{
         System.out.println("Ingresa el año");
         anio = teclado.nextInt();
         fInicio = LocalDate.of(anio, mes, dia);
-        
+
         System.out.println("Ingresa la fecha de fin");
         System.out.println("Ingresa el dia");
         dia = teclado.nextInt();
@@ -61,17 +61,18 @@ public class VistaTarea extends Vista<Tarea>{
                     break;
             }
 
-            if(opc > 2 || opc < 1 || b.isEmpty()) continue;
+            if (opc > 2 || opc < 1 || b.isEmpty())
+                continue;
 
-            do{
+            do {
                 opc = teclado.nextInt();
-                if(opc<1 || opc>b.size()){
+                if (opc < 1 || opc > b.size()) {
                     System.out.println("Ingrese un indice válido");
                     vEmp.printBusqueda(b);
                 }
-            }while(opc<1 || opc>b.size());
-            
-            responsable = b.get(opc-1).getCodigo();
+            } while (opc < 1 || opc > b.size());
+
+            responsable = b.get(opc - 1).getCodigo();
             break;
         }
 
@@ -83,35 +84,35 @@ public class VistaTarea extends Vista<Tarea>{
     }
 
     @Override
-    public void print(){
+    public void print() {
         List<Tarea> registros = logica.getRepo().getLista();
         Empleado responsable;
-        if(registros.isEmpty()) System.out.println("No existen "+nombreTipo+"s");
+        if (registros.isEmpty())
+            System.out.println("No existen " + nombreTipo + "s");
 
         for (Tarea r : registros) {
             System.out.println(r);
             responsable = vEmp.logica.buscar_por_id(r.getResponsable()).get(0);
-            System.out.println("Responsable "+responsable.getNombre()+" "+responsable.getApellidoP()+" "+responsable.getApellidoM());
+            System.out.println("Responsable " + responsable.getNombre() + " " + responsable.getApellidoP() + " "
+                    + responsable.getApellidoM());
         }
         System.out.println("");
     }
 
     @Override
     public void eliminar() {
-        // TODO 
-        
+        // TODO
+
     }
 
     @Override
     public void modificar() {
-        // TODO 
-        
+        // TODO
+
     }
 
-    public List<Tarea> buscar(){
+    public List<Tarea> buscar() {
         List<Tarea> b = new ArrayList<>();
-
-
 
         return b;
     }
