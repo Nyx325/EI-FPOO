@@ -37,13 +37,14 @@ public class RepoTarea extends Repositorio<Tarea> {
         return new Tarea(
                 Integer.parseInt(datos[0]),
                 Integer.parseInt(datos[1]),
-                LocalDate.parse(datos[2]),
-                LocalDate.parse(datos[3])
+                Integer.parseInt(datos[2]),
+                LocalDate.parse(datos[3]),
+                LocalDate.parse(datos[4])
         );
     }
 
     @Override
     public String toStrCsv(Tarea r) {
-        return r.getCodigo()+separador+r.getResponsable()+separador+r.getfInicio()+separador+r.getfFin()+"\n";
+        return r.getCodigo()+separador+r.getResponsable()+separador+r.getProyecto()+separador+r.getfInicio()+separador+r.getfFin()+"\n";
     }
 }

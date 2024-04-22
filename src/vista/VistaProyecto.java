@@ -7,21 +7,21 @@ import java.util.List;
 import java.util.Scanner;
 
 import logica.LogicaProyecto;
+import logica.LogicaTarea;
 import persistencia.entidad.Empleado;
 import persistencia.entidad.Proyecto;
 import persistencia.entidad.Tarea;
-import persistencia.repositorio.RepoTarea;
 
 public class VistaProyecto extends Vista<Proyecto> {
     VistaEmpleado vEmp;
-    RepoTarea rTar;
+    LogicaTarea lTar;
 
     public VistaProyecto() throws IOException {
         this.nombreTipo = "proyecto";
         logica = new LogicaProyecto();
         teclado = new Scanner(System.in);
         vEmp = new VistaEmpleado();
-        rTar = RepoTarea.getInstancia();
+        lTar = new LogicaTarea();
     }
 
     @Override
@@ -47,11 +47,11 @@ public class VistaProyecto extends Vista<Proyecto> {
         p.setfInicio(LocalDate.of(fecha[2], fecha[1], fecha[0]));
 
         System.out.println("Ingresa la fecha de fin");
-        System.out.println("Ingresa el día de inicio");
+        System.out.println("Ingresa el día de fin");
         fecha[0] = teclado.nextInt();
-        System.out.println("Ingresa el mes de inicio");
+        System.out.println("Ingresa el mes de fin");
         fecha[1] = teclado.nextInt();
-        System.out.println("Ingresa el año de inicio");
+        System.out.println("Ingresa el año de fin");
         fecha[2] = teclado.nextInt();
         p.setfFin(LocalDate.of(fecha[2], fecha[1], fecha[0]));
 
@@ -238,7 +238,7 @@ public class VistaProyecto extends Vista<Proyecto> {
                 default:
                     break;
             }
-        } while (opc != 0);
+        } while (opc != 6);
         logica.getRepo().save();
     }
 
@@ -255,13 +255,33 @@ public class VistaProyecto extends Vista<Proyecto> {
             System.out.println("Jefe: " + responsable.getNombre() + " " + responsable.getApellidoP() + " "
                     + responsable.getApellidoM() + "\n");
             System.out.println("Tareas:");
-            if(rTar.getLista().isEmpty()) System.out.println("No existen tareas");
-            for(Tarea t : rTar.getLista()){
-                if(t.getCodigo() == r.getCodigo()){
+            if(lTar.getRepo().getLista().isEmpty()) System.out.println("No existen tareas");
+            for(Tarea t : lTar.getRepo().getLista()){
+                if(t.getProyecto() == r.getCodigo()){
                     System.out.println("- "+t);
                 }
             }
+            System.out.println("\n");
         }
-        System.out.println("");
+    }
+
+    @Override
+    public void eliminar() throws IOException{
+        int eleccion;
+        List<Proyecto> b = buscar();
+
+        if (b.isEmpty()) return;
+        System.out.println("0: Salir");
+
+        do{
+            eleccion = teclado.nextInt();
+            if(eleccion<0 || eleccion>b.size())
+                System.out.println("Ingrese un indice válido");
+        }while(eleccion<0 || eleccion>b.size());
+
+        if(eleccion == 0) return;
+
+        lTar.dropPorProyecto(b.get(eleccion-1).getCodigo());
+        logica.remove(b.get(eleccion-1));
     }
 }

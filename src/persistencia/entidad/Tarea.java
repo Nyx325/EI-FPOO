@@ -17,8 +17,9 @@ public class Tarea implements Almacenable {
         this.fFin = null;
     }
 
-    public Tarea(int codigo, int responsable, LocalDate fInicio, LocalDate fFin) {
+    public Tarea(int codigo, int responsable, int proyecto, LocalDate fInicio, LocalDate fFin) {
         this.codigo = codigo;
+        this.proyecto = proyecto;
         this.responsable = responsable;
         this.fInicio = fInicio;
         this.fFin = fFin;
